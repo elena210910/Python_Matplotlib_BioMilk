@@ -1,0 +1,99 @@
+import matplotlib.pyplot as plt
+import csv
+
+# Función para leer y extraer datos del archivo
+def read_sales_data(file_path):
+    sales_data = []
+    with open(file_path, newline="") as csvfile:
+        reader = csv.reader(csvfile, delimiter=",", quotechar="'")
+        next(reader)  # Eliminar encabezados (primera fila) creados en el archivo
+        for row in reader:
+            sale = {
+                "product_name": row[0].strip('" '),
+                "quantity": int(row[1].strip()),
+                "price": float(row[2].strip()),
+                "date": row[3].strip('" ')
+            }
+            sales_data.append(sale)
+    return sales_data
+
+def total_sales_per_product(sales_data):  # Suma total de ventas por producto
+    total_sum = {}
+    for sale in sales_data:
+        product_name = sale["product_name"]
+        total_sale = sale["price"] * sale["quantity"]
+        if product_name in total_sum:
+            total_sum[product_name] += total_sale
+        else:
+            total_sum[product_name] = total_sale
+    return total_sum
+
+def sales_over_time(sales_data):  # Suma total de ventas por fecha
+    sales_time = {}
+    for a in sales_data:
+        date = a["date"]
+        total = a["price"] * a["quantity"]
+        if date in sales_time:
+            sales_time[date] += total
+        else:
+            sales_time[date] = total
+
+    sorted_sales_time = dict(sorted(sales_time.items()))  # Ordenar por fecha ASC
+    return sorted_sales_time
+
+file_path = r"ruta_del_archivo\sales_product.csv"
+# Llamar a las funciones
+sales_data = read_sales_data(file_path)
+total_sum = total_sales_per_product(sales_data)
+sales_time = sales_over_time(sales_data)
+
+"""Verificación de la correcta visualización y extracción de datos del archivo"""
+#print("Tabla")
+#for sale in sales_data:
+    #print(f"Producto: {sale['product_name']}, Cantidad: {sale['quantity']}, Precio: {sale['price']}, Fecha: {sale['date']}")
+
+#print("\nSuma total de ventas por producto:")
+#for product, total in total_sum.items():
+    #print(f"{product}: {total}")
+
+#print("\nSuma total de ventas por fechas:")
+#for date, total in sales_time.items():
+    #print(f"{date}: {total}")
+
+# Producto que generó más ingresos
+favorite_product = max(total_sum, key=total_sum.get)
+max_sum = round(total_sum[favorite_product], 2)
+print(f"Producto más vendido: {favorite_product}, suma de ingresos = {max_sum} euros")
+
+# Día con la mayor suma de ventas
+day_max = max(sales_time, key=sales_time.get)
+sum_max = round(sales_time[day_max], 2)
+print(f"Día más rentable de venta leches ecologicos: {day_max}, con una suma total de ventas de {sum_max} euros")
+
+plt.figure(figsize=(12, 8))
+# Gráfico de la suma de ventas por producto
+x = list(total_sum.keys())
+y = list(total_sum.values())
+
+plt.subplot(2, 1, 1)
+plt.bar(x, y, color='skyblue')
+plt.title("Suma total de ventas por producto")
+plt.xlabel("Producto")
+plt.ylabel("Suma")
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Gráfico de la suma total de ventas por fechas
+x1 = list(sales_time.keys())
+y1 = list(sales_time.values())
+
+plt.subplot(2, 1, 2)
+plt.plot(x1, y1, "go-")
+
+plt.title("Suma total de ventas por fechas")
+plt.xlabel("Fecha")
+plt.ylabel("Suma de ingresos")
+plt.tight_layout()
+plt.gca().set_facecolor('lightpink')  # Establecer fondo
+
+plt.show()
