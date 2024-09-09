@@ -18,7 +18,9 @@ Tenemos un archivo CSV con datos de ventas diarias (el dicho archivo adjunto en 
 
 
 
-3. **Gráficos construidos a partir del análisis**
+
+
+**Gráficos construidos a partir del análisis**
 
 
 
