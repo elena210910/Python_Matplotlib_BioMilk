@@ -14,7 +14,7 @@ Tenemos un archivo CSV con datos de ventas diarias (el dicho archivo adjunto en 
 
 1.[Archivo CSV que requiere analisis](https://github.com/elena210910/Python_Matplotlib_BioMilk/blob/main/sales_product.csv)
 
-2.[El codigo Python para analizar](https://github.com/elena210910/Python_Matplotlib_BioMilk/blob/main/sales_product.csv)
+2.[El codigo Python para analizar](https://github.com/elena210910/Python_Matplotlib_BioMilk/blob/main/Codigo_python))
 
 
 
