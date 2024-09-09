@@ -1,4 +1,6 @@
 # Python_Matplotlib_BioMilk
+![Imagin](https://github.com/elena210910/Python_Matplotlib_BioMilk/blob/main/Milk.jfif)
+
 
 **Descripción del proyecto:**
 
